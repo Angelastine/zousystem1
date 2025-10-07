@@ -1,0 +1,52 @@
+{% load static %}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+    <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark" style="background-color:rgb(51, 51, 51);">
+            <div class="container-fluid">
+            <a href="{% url 'staff_dash:home' %}" class="navbar-brand">Library Management Systems |</a>
+            <button
+            type="button"
+            class="navbar-toggler"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a href="{% url 'staff_dash:home' %}"  class="nav-item nav-link active">Home</a>
+                <a href="{% url 'staff_dash:add_staff' %}" class="nav-item nav-link ">Add Staff</a>
+                <a href="{% url 'staff_dash:add_student' %}" class="nav-item nav-link ">Add Student</a>
+                <a href="{% url 'staff_dash:upload_book' %}" class="nav-item nav-link ">Upload Book</a>
+                <a href="{% url 'staff_dash:analytics_dashboard' %}" class="nav-item nav-link ">Analytics</a>
+            </div>
+            <div class="navbar-nav ms-auto">
+            <a href="{% url 'landing:logout' %}" class="nav-item nav-link active">Logout</a>
+            </div>
+            </div>
+            </div>
+            </nav>
+        {% block content  %}
+
+    {% endblock %}
+</div>
+<br/>
+
+
+    <footer class="footer fixed-bottom text-white text-center"  style="background-color:rgb(51, 51, 51); " >
+                    <div class="container">
+                        <p>Library Management System &copy;2025 </p>
+
+
+                    </div>
+                </footer>
+
+</body>
+</html>

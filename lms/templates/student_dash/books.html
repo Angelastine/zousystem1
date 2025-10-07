@@ -1,0 +1,36 @@
+{% extends 'student_dash/base.html' %}
+{% block content %}
+<div class="container py-5">
+    <h3 class="text-center mb-4 fw-bold">Library Catalog</h3>
+
+    <form method="GET" class="d-flex mb-4 justify-content-center">
+        <input type="text" name="q" class="form-control me-2" style="max-width:400px" placeholder="Search by title, author, or genre" value="{{ query }}">
+        <button class="btn btn-primary me-2">Search</button>
+        <a href="{% url 'student_dash:home' %}" class="btn btn-outline-secondary">Clear</a>
+    </form>
+
+    {% if books %}
+        <div class="row">
+            {% for book in books %}
+                <div class="col-md-3 mb-4">
+                    <div class="card shadow-sm h-100">
+                        {% if book.cover_image %}
+                            <img src="{{ book.cover_image.url }}" class="card-img-top" alt="{{ book.title }}" style="height:250px;object-fit:cover;">
+                        {% else %}
+                            <img src="{% static 'default_cover.jpg' %}" class="card-img-top" alt="No cover" style="height:250px;object-fit:cover;">
+                        {% endif %}
+                        <div class="card-body">
+                            <h6 class="fw-bold">{{ book.title }}</h6>
+                            <p class="small text-muted">{{ book.author }}</p>
+                            <a href="{% url 'student_dash:book_detail' book.pk %}" class="btn btn-sm btn-info w-100 mb-1">View</a>
+                            <a href="{% url 'student_dash:download_book' book.pk %}" class="btn btn-sm btn-success w-100">Download</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-muted">No books found.</p>
+    {% endif %}
+</div>
+{% endblock %}

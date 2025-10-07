@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LMS | Student Dashboard</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+    <script src="{% static 'home/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Optional custom styles -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        footer {
+            background-color: rgb(51, 51, 51);
+            color: white;
+            padding: 10px 0;
+        }
+        .navbar {
+            background-color: rgb(51, 51, 51);
+        }
+        .content-wrapper {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 🌐 Navbar -->
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a href="{% url 'student_dash:home' %}" class="navbar-brand">
+            Welcome {{ user.first_name }} {{ user.last_name }} |
+        </a>
+
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <!-- Left Menu -->
+            <div class="navbar-nav">
+                <a href="{% url 'student_dash:home' %}" class="nav-item nav-link active">Library</a>
+                <a href="{% url 'student_dash:home' %}" class="nav-item nav-link">Search</a>
+                <a href="#" class="nav-item nav-link">Account</a>
+            </div>
+
+            <!-- Right Menu -->
+            <div class="navbar-nav ms-auto">
+                <a href="#" class="nav-item nav-link">Notifications</a>
+                <a href="{% url 'landing:logout' %}" class="nav-item nav-link">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- 📘 Page Content -->
+<div class="content-wrapper container py-4">
+    {% block content %}
+    <!-- Each page’s unique content will go here -->
+    {% endblock %}
+</div>
+
+<!-- 🧭 Footer -->
+<footer class="footer text-center mt-auto">
+    <div class="container">
+        <p class="mb-0">Library Management System &copy; 2025 | Developed by LMS Team</p>
+    </div>
+</footer>
+
+</body>
+</html>

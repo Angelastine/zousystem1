@@ -1,0 +1,51 @@
+{% extends 'staff_dash/base.html' %}
+{% block content %}
+<div class="container py-4">
+    <h3 class="fw-bold text-center mb-4">Borrow Requests</h3>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Student</th>
+                    <th>Book</th>
+                    <th>Date Requested</th>
+                    <th>Status</th>
+                    <th>Return Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for req in requests %}
+                <tr>
+                    <td>{{ req.student.get_full_name }} ({{ req.student.username }})</td>
+                    <td>{{ req.book.title }}</td>
+                    <td>{{ req.request_date|date:"M d, Y" }}</td>
+                    <td>
+                        {% if req.status == 'pending' %}
+                            <span class="badge bg-warning text-dark">Pending</span>
+                        {% elif req.status == 'approved' %}
+                            <span class="badge bg-success">Approved</span>
+                        {% elif req.status == 'declined' %}
+                            <span class="badge bg-danger">Declined</span>
+                        {% else %}
+                            <span class="badge bg-secondary">Returned</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ req.return_date|default:"-" }}</td>
+                    <td>
+                        {% if req.status == 'pending' %}
+                            <a href="{% url 'staff_dash:approve_request' req.pk %}" class="btn btn-sm btn-success">Approve</a>
+                            <a href="{% url 'staff_dash:decline_request' req.pk %}" class="btn btn-sm btn-danger">Decline</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center text-muted">No borrow requests yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

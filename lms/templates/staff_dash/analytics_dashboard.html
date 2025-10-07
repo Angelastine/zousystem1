@@ -1,0 +1,52 @@
+{% extends 'staff_dash/base.html' %}
+
+{% block content %}
+<div class="container py-4">
+    <h3 class="text-center text-primary mb-4">Library Analytics Dashboard</h3>
+
+    <div class="row text-center mb-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm p-3 bg-light">
+                <h5>Total Books</h5>
+                <h2>{{ total_books }}</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm p-3 bg-light">
+                <h5>Total Views</h5>
+                <h2>{{ total_views }}</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm p-3 bg-light">
+                <h5>Total Downloads</h5>
+                <h2>{{ total_downloads }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">Book Performance</div>
+        <table class="table table-striped mb-0">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Views</th>
+                    <th>Downloads</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.views }}</td>
+                    <td>{{ book.downloads }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

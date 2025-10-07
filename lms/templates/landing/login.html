@@ -1,0 +1,50 @@
+{% extends 'landing/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-4 col-md-4 col-sm-8 col-11 rounded-4">
+        <h4 class="text-center mb-4 fw-bold text-primary">LMS Login Portal</h4>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} text-center py-2">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST" autocomplete="off">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
+                    autocomplete="off"
+                    required>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="new-password"
+                    required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 rounded-pill py-2">Login</button>
+        </form>
+
+        <p class="text-center mt-3 text-muted small">
+            ZOU Library Management System © {{ now|date:"Y" }}
+        </p>
+    </div>
+</div>
+{% endblock %}
